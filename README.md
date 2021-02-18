@@ -23,6 +23,7 @@
 
 1. Dockerイメージのビルド
    ```shell
+   % cp .env.example .env
    % docker-compose build
    ```
 
