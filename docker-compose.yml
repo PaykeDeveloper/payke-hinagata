@@ -34,6 +34,7 @@ services:
       REDIS_PORT: 6379
     depends_on:
       - db
+      - cache
     volumes:
       - ./backend:/var/www/html
   db:
