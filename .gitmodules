@@ -2,3 +2,7 @@
 	path = frontend
 	url = ../payke-hinagata-frontend.git
 	ignore = dirty
+[submodule "backend"]
+	path = backend
+	url = ../payke-hinagata-backend.git
+	ignore = dirty
