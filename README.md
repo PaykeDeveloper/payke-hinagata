@@ -36,7 +36,7 @@
 1. バックエンドの環境整備
    ```shell
    % docker-compose run backend sh
-   backend% php composer.phar install
+   backend% composer install
    backend% cp .env.example .env
    backend% php artisan key:generate
    backend% php artisan migrate

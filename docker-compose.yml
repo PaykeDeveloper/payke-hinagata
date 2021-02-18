@@ -50,7 +50,6 @@ services:
       MYSQL_PASSWORD: VR*aT[f>wAn7m5u2
       MYSQL_REPLICA_USER: follower
       MYSQL_REPLICA_PASSWORD: 6Io^AkNzz5AuWb+x
-      TZ: "Asia/Tokyo"
     ports:
       - 3306:3306
     volumes:
