@@ -42,6 +42,7 @@ services:
       context: ./docker/db
       args:
         MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
         MYSQL_REPLICA_USER: ${MYSQL_REPLICA_USER}
         MYSQL_REPLICA_PASSWORD: ${MYSQL_REPLICA_PASSWORD}
     environment:
