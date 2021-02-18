@@ -1,3 +1,4 @@
 [submodule "frontend"]
 	path = frontend
-	url = git@github.com:PaykeDeveloper/payke-hinagata-frontend.git
+	url = ../payke-hinagata-frontend.git
+	ignore = dirty
