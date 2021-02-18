@@ -21,14 +21,14 @@ services:
     environment:
       DB_READ_HOST: db
       DB_READ_PORT: 3306
-      DB_READ_DATABASE: payke_template
-      DB_READ_USERNAME: follower
-      DB_READ_PASSWORD: 6Io^AkNzz5AuWb+x
+      DB_READ_DATABASE: ${MYSQL_DATABASE}
+      DB_READ_USERNAME: ${MYSQL_REPLICA_USER}
+      DB_READ_PASSWORD: ${MYSQL_REPLICA_PASSWORD}
       DB_WRITE_HOST: db
       DB_WRITE_PORT: 3306
-      DB_WRITE_DATABASE: payke_template
-      DB_WRITE_USERNAME: admin
-      DB_WRITE_PASSWORD: VR*aT[f>wAn7m5u2
+      DB_WRITE_DATABASE: ${MYSQL_DATABASE}
+      DB_WRITE_USERNAME: ${MYSQL_USER}
+      DB_WRITE_PASSWORD: ${MYSQL_PASSWORD}
       REDIS_HOST: cache
       REDIS_PASSWORD: null
       REDIS_PORT: 6379
@@ -40,16 +40,14 @@ services:
     build:
       context: ./docker/db
       args:
-        MYSQL_DATABASE: payke_template
-        MYSQL_REPLICA_USER: follower
-        MYSQL_REPLICA_PASSWORD: 6Io^AkNzz5AuWb+x
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_REPLICA_USER: ${MYSQL_REPLICA_USER}
+        MYSQL_REPLICA_PASSWORD: ${MYSQL_REPLICA_PASSWORD}
     environment:
-      MYSQL_ROOT_PASSWORD: _xwJL4<N_<ib5FP]
-      MYSQL_DATABASE: payke_template
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: VR*aT[f>wAn7m5u2
-      MYSQL_REPLICA_USER: follower
-      MYSQL_REPLICA_PASSWORD: 6Io^AkNzz5AuWb+x
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - 3306:3306
     volumes:
