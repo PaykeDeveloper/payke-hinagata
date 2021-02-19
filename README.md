@@ -38,8 +38,6 @@
    ```shell
    % docker-compose run backend sh
    backend% composer install
-   backend% cp .env.example .env
-   backend% php artisan key:generate
    backend% composer migrate
    backend% composer helper
    backend% exit
