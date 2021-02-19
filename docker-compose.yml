@@ -65,6 +65,7 @@ services:
     ports:
       - 3306:3306
     volumes:
+      - ./docker/db/log:/var/log/mysql/
       - db-data:/var/lib/mysql
   cache:
     image: redis:5.0.8
