@@ -40,9 +40,11 @@
    backend% composer install
    backend% cp .env.example .env
    backend% php artisan key:generate
-   backend% php artisan migrate
+   backend% composer migrate
+   backend% composer helper
    backend% exit
    ```
+   ※ `composer helper`は、モデルを更新した際、ソースの取得を行った際も実行しましょう。
 
 1. 起動
    ```shell
