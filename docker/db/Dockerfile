@@ -15,7 +15,6 @@ RUN sed -i 's/:replica_password/'"${MYSQL_REPLICA_PASSWORD}"'/g' /docker-entrypo
 COPY tmp/my.cnf /tmp/my.cnf
 RUN cat /tmp/my.cnf >> /etc/my.cnf
 
-RUN touch /var/log/mysql_slow.log
-RUN touch /var/log/mysql_general.log
-RUN chown mysql:mysql /var/log/mysql_slow.log
-RUN chown mysql:mysql /var/log/mysql_general.log
+ENV LOG_DIR /var/log/mysql/
+RUN mkdir $LOG_DIR
+RUN chown mysql:mysql $LOG_DIR
