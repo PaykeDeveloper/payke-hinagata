@@ -36,11 +36,11 @@
 
 1. バックエンドの環境整備
    ```shell
-   % docker-compose run backend sh
-   backend% composer install
-   backend% composer migrate
-   backend% composer helper
-   backend% exit
+   % docker-compose run backend-web sh
+   backend-web% composer install
+   backend-web% composer migrate
+   backend-web% composer helper
+   backend-web% exit
    ```
    ※ `composer helper`は、モデルを更新した際、ソースの取得を行った際も実行しましょう。
 
