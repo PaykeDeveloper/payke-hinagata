@@ -68,7 +68,7 @@ services:
       - ./docker/db/log:/var/log/mysql/
       - db-data:/var/lib/mysql
   cache:
-    image: redis:5.0.8
+    image: redis:6.0.10
     ports:
       - 6379:6379
     volumes:
