@@ -1,4 +1,4 @@
-FROM nginx:1.19
+FROM nginx:1.19.7
 
 RUN apt-get update -qq
 

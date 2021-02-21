@@ -1,4 +1,4 @@
-FROM mysql/mysql-server:8.0
+FROM mysql/mysql-server:8.0.23
 
 ARG MYSQL_DATABASE
 ARG MYSQL_USER
