@@ -1,4 +1,40 @@
 version: '3.8'
+
+x-backend: &x-backend
+  build:
+    context: ./backend
+  environment:
+    APP_ENV: ${APP_ENV}
+    APP_KEY: ${APP_KEY}
+    APP_DEBUG: ${APP_DEBUG}
+    APP_URL: ${APP_URL}
+    DB_READ_HOST: db
+    DB_READ_PORT: 3306
+    DB_READ_DATABASE: ${MYSQL_DATABASE}
+    DB_READ_USERNAME: ${MYSQL_REPLICA_USER}
+    DB_READ_PASSWORD: ${MYSQL_REPLICA_PASSWORD}
+    DB_WRITE_HOST: db
+    DB_WRITE_PORT: 3306
+    DB_WRITE_DATABASE: ${MYSQL_DATABASE}
+    DB_WRITE_USERNAME: ${MYSQL_USER}
+    DB_WRITE_PASSWORD: ${MYSQL_PASSWORD}
+    REDIS_HOST: cache
+    REDIS_PASSWORD: null
+    REDIS_PORT: 6379
+    MAIL_HOST: mailhog
+    MAIL_PORT: 1025
+    MAIL_USERNAME: null
+    MAIL_PASSWORD: null
+    MAIL_ENCRYPTION: null
+    MAIL_FROM_ADDRESS: null
+    LOG_CHANNEL: stderr
+    LOG_LEVEL: debug
+  depends_on:
+    - db
+    - cache
+  volumes:
+    - ./backend:/var/www/html
+
 services:
   frontend:
     build:
@@ -14,41 +50,12 @@ services:
     ports:
       - 8000:80
     depends_on:
-      - backend
-  backend:
-    build:
-      context: ./backend
-    environment:
-      APP_ENV: ${APP_ENV}
-      APP_KEY: ${APP_KEY}
-      APP_DEBUG: ${APP_DEBUG}
-      APP_URL: ${APP_URL}
-      DB_READ_HOST: db
-      DB_READ_PORT: 3306
-      DB_READ_DATABASE: ${MYSQL_DATABASE}
-      DB_READ_USERNAME: ${MYSQL_REPLICA_USER}
-      DB_READ_PASSWORD: ${MYSQL_REPLICA_PASSWORD}
-      DB_WRITE_HOST: db
-      DB_WRITE_PORT: 3306
-      DB_WRITE_DATABASE: ${MYSQL_DATABASE}
-      DB_WRITE_USERNAME: ${MYSQL_USER}
-      DB_WRITE_PASSWORD: ${MYSQL_PASSWORD}
-      REDIS_HOST: cache
-      REDIS_PASSWORD: null
-      REDIS_PORT: 6379
-      MAIL_HOST: mailhog
-      MAIL_PORT: 1025
-      MAIL_USERNAME: null
-      MAIL_PASSWORD: null
-      MAIL_ENCRYPTION: null
-      MAIL_FROM_ADDRESS: null
-      LOG_CHANNEL: stderr
-      LOG_LEVEL: debug
-    depends_on:
-      - db
-      - cache
-    volumes:
-      - ./backend:/var/www/html
+      - backend-web
+  backend-web:
+    <<: *x-backend
+  backend-worker:
+    <<: *x-backend
+    command: php artisan queue:work
   db:
     build:
       context: ./docker/db
@@ -73,6 +80,7 @@ services:
       - 6379:6379
     volumes:
       - cache-data:/data
+
 volumes:
   db-data:
     driver: local
