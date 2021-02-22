@@ -21,17 +21,18 @@ x-backend: &x-backend
     REDIS_HOST: cache
     REDIS_PASSWORD: null
     REDIS_PORT: 6379
-    MAIL_HOST: mailhog
+    MAIL_HOST: mail
     MAIL_PORT: 1025
     MAIL_USERNAME: null
     MAIL_PASSWORD: null
-    MAIL_ENCRYPTION: null
-    MAIL_FROM_ADDRESS: null
+    MAIL_ENCRYPTION: ''
+    MAIL_FROM_ADDRESS: info@example.com
     LOG_CHANNEL: stderr
     LOG_LEVEL: debug
   depends_on:
     - db
     - cache
+    - mail
   volumes:
     - ./backend:/var/www/html
 
@@ -80,6 +81,10 @@ services:
       - 6379:6379
     volumes:
       - cache-data:/data
+  mail:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
 
 volumes:
   db-data:
