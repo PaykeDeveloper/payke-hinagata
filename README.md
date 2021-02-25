@@ -48,3 +48,17 @@
    ```shell
    % docker-compose up
    ```
+
+
+## How to use
+### artisanコマンドの一覧を確認
+```shell
+% docker-compose run backend-web sh
+backend-web% php artisan list
+```
+
+### ユーザーの作成
+```shell
+% docker-compose run backend-web sh
+backend-web% php artisan user:create {email} {password}
+```
