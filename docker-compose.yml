@@ -8,6 +8,9 @@ x-backend: &x-backend
     APP_KEY: ${APP_KEY}
     APP_DEBUG: ${APP_DEBUG}
     APP_URL: ${APP_URL}
+    SESSION_DOMAIN: localhost
+    SESSION_SECURE_COOKIE: 'false'
+    SANCTUM_STATEFUL_DOMAINS: localhost:3000
     DB_READ_HOST: db
     DB_READ_PORT: 3306
     DB_READ_DATABASE: ${MYSQL_DATABASE}
@@ -40,6 +43,8 @@ services:
   frontend:
     build:
       context: ./frontend
+    environment:
+      REACT_APP_BACKEND_ORIGIN: http://localhost:8000
     command: yarn start
     ports:
       - 3000:3000
