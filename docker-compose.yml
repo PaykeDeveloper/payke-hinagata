@@ -62,6 +62,8 @@ services:
       - 8000:80
     depends_on:
       - backend-web
+    volumes:
+      - ./backend/storage/app/public:/var/www/html/public/storage
   backend-web:
     <<: *x-backend
   backend-worker:
