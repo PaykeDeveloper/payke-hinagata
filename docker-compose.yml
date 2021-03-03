@@ -49,7 +49,7 @@ services:
     build:
       context: ./frontend
     environment:
-      REACT_APP_BACKEND_ORIGIN: http://localhost:8000
+      REACT_APP_BACKEND_ORIGIN: ${APP_URL}
     command: yarn start
     ports:
       - 3000:3000
