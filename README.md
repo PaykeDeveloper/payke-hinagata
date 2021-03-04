@@ -40,7 +40,6 @@
    backend-web% composer install
    backend-web% composer migrate
    backend-web% composer db:seed
-   backend-web% composer storage:link
    backend-web% composer helper
    backend-web% exit
    ```
