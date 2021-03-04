@@ -37,7 +37,7 @@
 1. バックエンドの環境整備
    ```shell
    % docker-compose run backend-web sh
-   backend-web% composer install
+   backend-web% composer install --ignore-platform-req=php
    backend-web% composer migrate
    backend-web% composer db:seed
    backend-web% composer helper
