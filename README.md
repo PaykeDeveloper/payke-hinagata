@@ -40,6 +40,7 @@
    backend-web% composer install
    backend-web% composer migrate
    backend-web% composer db:seed
+   backend-web% composer publish
    backend-web% composer helper
    backend-web% exit
    ```
@@ -52,9 +53,15 @@
 
 
 ## How to use
-### artisanコマンドの一覧を確認
+### 開発のみで利用可能なURL一覧
+- http://localhost:8000/phpinfo
+- http://localhost:8000/telescope
+- http://localhost:8025
+
+### composer、artisanコマンドの一覧を確認
 ```shell
 % docker-compose run backend-web sh
+backend-web% composer list
 backend-web% php artisan list
 ```
 

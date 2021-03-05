@@ -4,4 +4,8 @@ RUN apt-get update -qq
 
 COPY etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
-WORKDIR /var/www/html/public/storage
+
+ENV BASE_DIR /var/www/html/public
+WORKDIR $BASE_DIR
+RUN mkdir $BASE_DIR/storage
+RUN mkdir $BASE_DIR/vendor
