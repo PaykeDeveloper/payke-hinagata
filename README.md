@@ -66,8 +66,10 @@ backend-web% composer list
 backend-web% php artisan list
 ```
 
-### ユーザーの作成
+### ユーザー、トークンの作成
 ```shell
 % docker-compose run backend-web sh
 backend-web% php artisan user:create {email} {password}
+backend-web% php artisan token:create {email} {password}
 ```
+トークンをしすると、認証が必要なAPIも [ドキュメント](http://localhost:8000/docs/) で検証が可能です。
