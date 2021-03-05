@@ -65,6 +65,7 @@ services:
     volumes:
       - ./backend/storage/app/public:/var/www/html/public/storage
       - ./backend/public/vendor:/var/www/html/public/vendor
+      - ./backend/public/docs:/var/www/html/public/docs
   backend-web:
     <<: *x-backend
   backend-worker:
