@@ -54,9 +54,10 @@
 
 ## How to use
 ### 開発のみで利用可能なURL一覧
-- http://localhost:8000/phpinfo
-- http://localhost:8000/telescope
-- http://localhost:8025
+- http://localhost:8000/docs/
+- http://localhost:8000/phpinfo/
+- http://localhost:8000/telescope/
+- http://localhost:8025/
 
 ### composer、artisanコマンドの一覧を確認
 ```shell
