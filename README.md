@@ -19,7 +19,8 @@
     % git checkout main
     % cd ../backend/
     % git checkout main
-    ```
+    % cd ../
+   ```
 
 1. Dockerイメージのビルド
    ```shell
@@ -44,7 +45,8 @@
    backend-web% composer helper
    backend-web% exit
    ```
-   ※ `composer helper`は、モデルを更新した際、ソースの取得を行った際も実行しましょう。
+   ※ `composer publish`は、APIを作成／変更／削除後にも実行します。
+   ※ `composer helper`は、`composer update`後、ソース最新化後、モデル更新後のも実行します。
 
 1. 起動
    ```shell
@@ -54,10 +56,14 @@
 
 ## How to use
 ### 開発のみで利用可能なURL一覧
-- http://localhost:8000/docs/
-- http://localhost:8000/phpinfo/
-- http://localhost:8000/telescope/
-- http://localhost:8025/
+1. APIドキュメント
+   - http://localhost:8000/docs/
+1. `phpinfo()`の結果
+   - http://localhost:8000/phpinfo/
+1. デバッグログ
+   - http://localhost:8000/telescope/
+1. メーラー
+   - http://localhost:8025/
 
 ### composer、artisanコマンドの一覧を確認
 ```shell
@@ -73,3 +79,9 @@ backend-web% php artisan user:create {email} {password}
 backend-web% php artisan token:create {email} {password}
 ```
 トークンをしすると、認証が必要なAPIも [ドキュメント](http://localhost:8000/docs/) で検証が可能です。
+
+## Staging release
+1. [バッグエンドの環境構築](https://payke.esa.io/posts/3147)
+1. [フロントエンドの環境構築](https://payke.esa.io/posts/3146)
+1. [DNSの環境構築](https://payke.esa.io/posts/3149)
+ 
