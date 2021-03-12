@@ -39,8 +39,8 @@
    ```shell
    % docker-compose run backend-web sh
    backend-web% composer install
-   backend-web% composer migrate
-   backend-web% composer db:seed
+   backend-web% php artisan migrate
+   backend-web% php artisan db:seed
    backend-web% composer publish
    backend-web% composer helper
    backend-web% exit
@@ -72,13 +72,28 @@ backend-web% composer list
 backend-web% php artisan list
 ```
 
-### ユーザー、トークンの作成
+### ユーザー、トークンの作成コマンド
 ```shell
 % docker-compose run backend-web sh
 backend-web% php artisan user:create {email} {password}
 backend-web% php artisan token:create {email} {password}
 ```
 トークンをしすると、認証が必要なAPIも [ドキュメント](http://localhost:8000/docs/) で検証が可能です。
+
+### その他、バックエンドの便利コマンド
+- 対話シェルを起動
+   ```shell
+   backend-web% php artisan tinker
+   ```
+- DBを初期化
+   ```shell
+   backend-web% php artisan migrate:fresh
+   ```
+- URL一覧を確認
+   ```shell
+   backend-web% php artisan route:list
+   ```
+
 
 ## Staging release
 1. [バッグエンドの環境構築](https://payke.esa.io/posts/3147)
