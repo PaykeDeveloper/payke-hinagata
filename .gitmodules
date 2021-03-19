@@ -6,3 +6,7 @@
 	path = backend
 	url = ../payke-hinagata-backend.git
 	ignore = dirty
+[submodule "native"]
+	path = native
+	url = ../payke-hinagata-native.git
+	ignore = dirty
