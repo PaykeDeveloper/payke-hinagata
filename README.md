@@ -2,7 +2,7 @@
 
 新規開発を加速させる為のボイラープレートです。
 
-## Installation
+## Set up
 
 ### ソースの取得
 
@@ -61,16 +61,27 @@ frontend% exit
 ### ネイティブの環境整備
 
 ```shell
+% cd native/
 % brew install --cask flutter
 % flutter doctor
+% flutter pub get
 ```
 
 ※ [公式ドキュメント](https://flutter.dev/docs/get-started/install/macos) を参照しましょう。
 
-### 起動
+## Run
+
+### バックエンドとフロントエンドを起動
 
 ```shell
 % docker-compose up
+```
+
+### ネイティブを起動
+
+```shell
+% cd native/
+% flutter run
 ```
 
 ## How to use
