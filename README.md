@@ -1,24 +1,44 @@
-# Payke Hinagata
+# Hinagata
+Webやモバイルアプリの新規開発で使用するボイラープレートです。
+作成するアプリは、社内システムなどクローズドな物を想定しています。
 
-新規開発を加速させる為のボイラープレートです。
+## 構成
 
-## Set up
+| 環境 | 概要 | プロジェクト内のディレクトリ |
+| --- | --- | --- |
+| Backend(web) | APIサーバー | backend/ |
+| Backend(worker) | Workerサーバー | backend/ |
+| Frontend | Webアプリ | frontend/ |
+| Native | モバイル(Android/iOS)アプリ | native/ |
+| DB | MySQLサーバー、永続データを保持 | docker/db/ |
+| Cache | Redisサーバー、セッション等をキャッシュ | - |
+| Proxy | Nginxサーバー、HTTPリクエストをBackend(web)に転送 | docker/web/ |
+
+### 使用する主な技術
+
+| 環境 | 言語 | フレームワーク |
+| --- | --- | --- |
+| Backend | PHP | Laravel |
+| Frontend | Typescript | React, Redux |
+| Native | Dart | Flutter, Provider |
+
+
+## 開発環境構築
+開発環境はdocker、docker-composeを使用して構築します。
+これらの使い方がわからない場合は、事前にキャッチアップしましょう。
 
 ### ソースの取得
-
 ```shell
 % git clone git@github.com:PaykeDeveloper/payke-hinagata.git
 % cd payke-hinagata
 ```
 
 ### サブモジュールの取得
-
 ```shell
 % git submodule update --init --recursive
 ```
 
 ### サブモジュールのブランチを切り替え
-
 ```shell
 % cd backend/
 % git checkout main
@@ -29,37 +49,42 @@
 % cd ../
 ```
 
-### Dockerイメージのビルド
-
+### .envファイルの作成、更新
 ```shell
 % cp .env.example .env
+```
+コピーした.envファイルの内容を変更して下さい。
+「!〜〜〜!」と記載された箇所が変更が必要な箇所です。
+APP_KEYは、後ほど取得した値を設定するので一旦スキップしてOKです。
+XXXX_PASSWORDに適当な値を設定して下さい。
+
+
+### Dockerイメージのビルド
+```shell
 % docker-compose build
 ```
 
-### バックエンドの環境整備
-
+### Backendの環境整備
 ```shell
 % docker-compose run backend-web sh
 backend-web% composer install
 backend-web% php artisan migrate
+backend-web% php artisan key:generate --show
 backend-web% php artisan db:seed
 backend-web% composer publish
 backend-web% composer helper
 backend-web% exit
 ```
+`php artisan key:generate --show`の実行結果(base64:〜〜〜)をAPP_KEYに設定して下さい。
 
-※ `composer publish`は、APIを作成／変更／削除後にも実行します。 ※ `composer helper`は、`composer update`後、ソース最新化後、モデル更新後のも実行します。
-
-### フロントエンドの環境整備
-
+### Frontendの環境整備
 ```shell
 % docker-compose run frontend sh
 frontend% yarn install
 frontend% exit
 ```
 
-### ネイティブの環境整備
-
+### Nativeの環境整備
 ```shell
 % cd native/
 % brew install --cask flutter
@@ -67,82 +92,25 @@ frontend% exit
 % flutter pub get
 ```
 
-※ [公式ドキュメント](https://flutter.dev/docs/get-started/install/macos) を参照しましょう。
+### 後処理
+```shell
+% docker-compose down
+```
 
-## Run
 
-### バックエンドとフロントエンドを起動
+## 起動方法
 
+### BackendとFrontendを起動
 ```shell
 % docker-compose up
 ```
 
-### ネイティブを起動
-
+### Nativeを起動
 ```shell
 % cd native/
 % flutter run
 ```
 
-## How to use
-
-### 開発のみで利用可能なURL一覧
-
-#### APIドキュメント
-
-- http://localhost:8000/docs/
-
-#### `phpinfo()`の結果
-
-- http://localhost:8000/phpinfo/
-
-#### デバッグログ
-
-- http://localhost:8000/telescope/
-
-#### メーラー
-
-- http://localhost:8025/
-
-### composer、artisanコマンドの一覧を確認
-
-```shell
-% docker-compose run backend-web sh
-backend-web% composer list
-backend-web% php artisan list
-```
-
-### ユーザー、トークンの作成コマンド
-
-```shell
-% docker-compose run backend-web sh
-backend-web% php artisan user:create {email} {password}
-```
-
-トークンをしすると、認証が必要なAPIも [ドキュメント](http://localhost:8000/docs/) で検証が可能です。
-
-### その他、バックエンドの便利コマンド
-
-#### 対話シェルを起動
-
-```shell
-backend-web% php artisan tinker
-```
-
-#### DBを初期化
-
-```shell
-backend-web% php artisan migrate:fresh
-```
-
-#### URL一覧を確認
-
-```shell
-backend-web% php artisan route:list
-```
-
-## Staging release
-
-1. [バッグエンドの環境構築](https://payke.esa.io/posts/3147)
-1. [フロントエンドの環境構築](https://payke.esa.io/posts/3146)
-1. [DNSの環境構築](https://payke.esa.io/posts/3149)
+## 開発方法
+Backend、Frontend、Nativeの各開発に関するTipsは、
+各サブモジュール内のREADME.mdを参照して下さい。
