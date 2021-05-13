@@ -51,7 +51,7 @@ services:
       context: ./frontend
     environment:
       REACT_APP_BACKEND_ORIGIN: ${APP_URL}
-      REACT_APP_DEBUG_TRANSLATION: ${FONTEND_APP_DEBUG_TRANSLATION}
+      REACT_APP_DEBUG_TRANSLATION: ${DEBUG_TRANSLATION}
     command: yarn start
     ports:
       - 3000:3000
