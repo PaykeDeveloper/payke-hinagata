@@ -6,4 +6,5 @@
 
 # Project
 /.env
-/docker/db/log/
+/docker/db/log/*
+!.gitkeep
