@@ -9,7 +9,7 @@ Webやモバイルアプリの新規開発で使用するボイラープレー�
 | --- | --- | --- |
 | Backend(web) | APIサーバー | backend/ |
 | Backend(worker) | Workerサーバー | backend/ |
-| Frontend | Webアプリ | frontend/ |
+| Frontend(web) | Webアプリ | frontend/ |
 | Native | モバイル(Android/iOS)アプリ | native/ |
 | DB | MySQLサーバー、永続データを保持 | docker/db/ |
 | Cache | Redisサーバー、セッション等をキャッシュ | - |
@@ -97,9 +97,9 @@ backend-web% exit
 
 ### Frontendの環境整備
 ```shell
-% docker-compose run frontend sh
-frontend% yarn install
-frontend% exit
+% docker-compose run frontend-web sh
+frontend-web% yarn install
+frontend-web% exit
 ```
 
 ### Nativeの環境整備
