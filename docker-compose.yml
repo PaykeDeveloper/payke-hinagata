@@ -81,6 +81,9 @@ services:
   backend-worker:
     <<: *x-backend
     command: php artisan queue:work
+  backend-scheduler:
+    <<: *x-backend
+    command: php artisan schedule:work
   db:
     build:
       context: ./docker/db
