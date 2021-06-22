@@ -45,18 +45,26 @@ x-backend: &x-backend
   volumes:
     - ./backend:/var/www/html
 
+x-frontend: &x-frontend
+  build:
+    context: ./frontend
+  environment:
+    REACT_APP_BACKEND_ORIGIN: ${APP_URL}
+    REACT_APP_DEBUG_TRANSLATION: ${DEBUG_TRANSLATION}
+  volumes:
+    - ./frontend:/app/frontend
+
 services:
-  frontend:
-    build:
-      context: ./frontend
-    environment:
-      REACT_APP_BACKEND_ORIGIN: ${APP_URL}
-      REACT_APP_DEBUG_TRANSLATION: ${DEBUG_TRANSLATION}
+  frontend-web:
+    <<: *x-frontend
     command: yarn start
     ports:
       - 3000:3000
-    volumes:
-      - ./frontend:/app/frontend
+  #frontend-storybook:
+  #  <<: *x-frontend
+  #  command: yarn storybook
+  #  ports:
+  #    - 6006:6006
   backend-proxy:
     build:
       context: ./docker/web
