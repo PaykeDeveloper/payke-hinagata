@@ -78,12 +78,12 @@ services:
       - ./backend/public/docs:/var/www/html/public/docs
   backend-web:
     <<: *x-backend
-  backend-worker:
-    <<: *x-backend
-    command: php artisan queue:work
-  backend-scheduler:
-    <<: *x-backend
-    command: php artisan schedule:work
+  #backend-worker:
+  #  <<: *x-backend
+  #  command: php artisan queue:work
+  #backend-scheduler:
+  #  <<: *x-backend
+  #  command: php artisan schedule:work
   db:
     build:
       context: ./docker/db
