@@ -6,7 +6,7 @@ x-backend: &x-backend
   environment:
     APP_ENV: ${APP_ENV}
     APP_KEY: ${APP_KEY}
-    APP_DEBUG: ${APP_DEBUG}
+    APP_DEBUG: "${APP_DEBUG}"
     APP_URL: ${APP_URL}
     SESSION_DOMAIN: ${SESSION_DOMAIN}
     SESSION_SECURE_COOKIE: 'false'
@@ -50,7 +50,7 @@ x-frontend: &x-frontend
     context: ./frontend
   environment:
     REACT_APP_BACKEND_ORIGIN: ${APP_URL}
-    REACT_APP_DEBUG_TRANSLATION: ${DEBUG_TRANSLATION}
+    REACT_APP_DEBUG_TRANSLATION: "${DEBUG_TRANSLATION}"
   volumes:
     - ./frontend:/app/frontend
 
