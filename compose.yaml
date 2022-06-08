@@ -1,0 +1,74 @@
+services:
+  #frontend-web:
+  #  extends:
+  #    file: common.yaml
+  #    service: frontend
+  #  command: yarn start
+  #  ports:
+  #    - 3000:3000
+  #frontend-storybook:
+  #  extends:
+  #    file: common.yaml
+  #    service: frontend
+  #  command: yarn storybook
+  #  ports:
+  #    - 6006:6006
+  backend-proxy:
+    build:
+      context: ./docker/web
+    ports:
+      - 8000:80
+    depends_on:
+      - backend-web
+    volumes:
+      - ./backend/storage/app/public:/var/www/html/public/storage
+      - ./backend/public/vendor:/var/www/html/public/vendor
+      - ./backend/public/docs:/var/www/html/public/docs
+  backend-web:
+    extends:
+      file: common.yaml
+      service: backend
+  #backend-worker:
+  #  extends:
+  #    file: common.yaml
+  #    service: backend
+  #  command: php artisan queue:work
+  #backend-scheduler:
+  #  extends:
+  #    file: common.yaml
+  #    service: backend
+  #  command: php artisan schedule:work
+  db:
+    build:
+      context: ./docker/db
+      args:
+        MYSQL_DATABASE:
+        MYSQL_USER:
+        MYSQL_REPLICA_USER:
+        MYSQL_REPLICA_PASSWORD:
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE:
+      MYSQL_USER:
+      MYSQL_PASSWORD:
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/db/log:/var/log/mysql/
+      - db-data:/var/lib/mysql
+  cache:
+    image: redis:6.0.10
+    ports:
+      - 6379:6379
+    volumes:
+      - cache-data:/data
+  mail:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+
+volumes:
+  db-data:
+    driver: local
+  cache-data:
+    driver: local

@@ -1,0 +1,53 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    environment:
+      APP_ENV: ${APP_ENV}
+      APP_KEY: ${APP_KEY}
+      APP_DEBUG: "${APP_DEBUG}"
+      APP_URL: ${APP_URL}
+      SESSION_DOMAIN: ${SESSION_DOMAIN}
+      SESSION_SECURE_COOKIE: 'false'
+      SANCTUM_STATEFUL_DOMAINS: ${SANCTUM_STATEFUL_DOMAINS}
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN}
+      DB_READ_HOST: db
+      DB_READ_PORT: 3306
+      DB_READ_DATABASE: ${MYSQL_DATABASE}
+      DB_READ_USERNAME: ${MYSQL_REPLICA_USER}
+      DB_READ_PASSWORD: ${MYSQL_REPLICA_PASSWORD}
+      DB_WRITE_HOST: db
+      DB_WRITE_PORT: 3306
+      DB_WRITE_DATABASE: ${MYSQL_DATABASE}
+      DB_WRITE_USERNAME: ${MYSQL_USER}
+      DB_WRITE_PASSWORD: ${MYSQL_PASSWORD}
+      REDIS_HOST: cache
+      REDIS_PASSWORD: null
+      REDIS_PORT: 6379
+      MAIL_HOST: mail
+      MAIL_PORT: 1025
+      MAIL_USERNAME: null
+      MAIL_PASSWORD: null
+      MAIL_ENCRYPTION: ''
+      MAIL_FROM_ADDRESS: info@example.com
+      MEDIA_DISK: ${MEDIA_DISK}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+      AWS_BUCKET: ${AWS_BUCKET}
+      LOG_CHANNEL: stderr
+      LOG_LEVEL: debug
+    depends_on:
+      - db
+      - cache
+      - mail
+    volumes:
+      - ./backend:/var/www/html
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      REACT_APP_BACKEND_ORIGIN: ${APP_URL}
+      REACT_APP_DEBUG_TRANSLATION: "${DEBUG_TRANSLATION}"
+    volumes:
+      - ./frontend:/app/frontend
