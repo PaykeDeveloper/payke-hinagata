@@ -78,6 +78,7 @@ backend-web% composer install
 backend-web% php artisan migrate
 backend-web% php artisan key:generate --show
 backend-web% php artisan db:seed
+backend-web% php artisan storage:link
 backend-web% composer publish
 backend-web% composer helper
 backend-web% exit
