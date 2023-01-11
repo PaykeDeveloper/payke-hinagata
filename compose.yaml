@@ -13,21 +13,12 @@ services:
   #  command: yarn storybook
   #  ports:
   #    - 6006:6006
-  backend-proxy:
-    build:
-      context: ./docker/web
-    ports:
-      - 8000:80
-    depends_on:
-      - backend-web
-    volumes:
-      - ./backend/storage/app/public:/var/www/html/public/storage
-      - ./backend/public/vendor:/var/www/html/public/vendor
-      - ./backend/public/docs:/var/www/html/public/docs
   backend-web:
     extends:
       file: common.yaml
       service: backend
+    ports:
+      - 8000:8000
   #backend-worker:
   #  extends:
   #    file: common.yaml
