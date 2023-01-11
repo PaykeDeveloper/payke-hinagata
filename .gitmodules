@@ -10,3 +10,7 @@
 	path = native
 	url = ../payke-hinagata-native.git
 	ignore = dirty
+[submodule "terraform"]
+	path = terraform
+	url = ../payke-hinagata-terraform.git
+	ignore = dirty
