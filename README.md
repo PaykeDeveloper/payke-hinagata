@@ -91,7 +91,7 @@ backend-web% exit
 ```shell
 % cd frontend/
 % cp .env.example .env
-% yarn install
+% npm install
 ```
 
 ### Nativeの環境整備
@@ -122,7 +122,7 @@ backend-web% exit
 
 ```shell
 % cd frontend/
-% yarn start
+% npm run start
 ```
 
 ### Nativeを起動
