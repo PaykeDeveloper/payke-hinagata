@@ -3,14 +3,14 @@ services:
   #  extends:
   #    file: common.yaml
   #    service: frontend
-  #  command: yarn start
+  #  command: npm run start
   #  ports:
   #    - 3000:3000
   #frontend-storybook:
   #  extends:
   #    file: common.yaml
   #    service: frontend
-  #  command: yarn storybook
+  #  command: npm run storybook
   #  ports:
   #    - 6006:6006
   backend-web:
